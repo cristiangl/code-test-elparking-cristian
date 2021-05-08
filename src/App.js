@@ -9,28 +9,32 @@ import {
 
 } from 'react-router-dom'
 import NotFound from './views/NotFound'
+import { Provider } from 'react-redux'
+import store from './store'
 
 function App () {
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path='/results'>
-            <Results></Results>
-          </Route>
-          <Route exact path='/game'>
-            <Game></Game>
-          </Route>
-          <Route exact path='/'>
-            <Home></Home>
-          </Route>
-          <Route>
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path='/results'>
+              <Results></Results>
+            </Route>
+            <Route exact path='/game'>
+              <Game></Game>
+            </Route>
+            <Route exact path='/'>
+              <Home></Home>
+            </Route>
+            <Route>
+              <NotFound></NotFound>
+            </Route>
+          </Switch>
 
-      </Router>
-    </div>
+        </Router>
+      </div>
+    </Provider>
   )
 }
 

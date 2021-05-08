@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import loader from '../assets/img/loading.svg'
 
 const MainContainerStyled = styled.div`
     border-radius: 19px;
@@ -24,20 +25,34 @@ const MainContainerStyled = styled.div`
         color: white;
     }
 
-    .button {
-        padding: 10px 20px;
-        color: var(--dark-color);
-        background-color: var(--secondary-color);
-        border-radius: 5px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: bold;
+    &.load {
+        position: relative;
     }
-    
-    .button:hover {
-        filter: brightness(120%);
-    }
-`
 
+    &.load:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(45,51,51,0.7);
+        z-index: 100;
+    }
+
+    &.load::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
+    z-index: 102;
+    background: url(${loader}) no-repeat center center;
+    background-size: 100%;
+    }
+
+`
 export default MainContainerStyled
