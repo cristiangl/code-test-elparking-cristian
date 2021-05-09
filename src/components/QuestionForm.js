@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import CustomInput from './CustomInput'
 import CustomButtonStyled from '../styled/customButton'
+import { ERROR_ANSWER, SKIPPED_ANSWER, SUCCESS_ANSWER, CONFIRM_ANSWER } from '../constants'
 
 const QuestionFormStyled = styled.div`
 
@@ -43,14 +44,14 @@ function QuestionForm ({ question, nextQuestion }) {
   }, [question])
 
   const submitQuestionForm = (typeAction) => {
-    if (typeAction === 'confirm') {
+    if (typeAction === CONFIRM_ANSWER) {
       if (question.number === parseInt(choosenAnswer)) {
-        nextQuestion('success')
+        nextQuestion(SUCCESS_ANSWER)
       } else {
-        nextQuestion('error')
+        nextQuestion(ERROR_ANSWER)
       }
     } else {
-      nextQuestion('skiped')
+      nextQuestion(typeAction)
     }
   }
 
@@ -64,8 +65,8 @@ function QuestionForm ({ question, nextQuestion }) {
             )
           })}
           <div className='buttonsBox'>
-            <Button className={(!choosenAnswer && 'disabled')} onClick={() => submitQuestionForm('confirm')} >Confirm</Button>
-            <Button className="secondary" onClick={ () => submitQuestionForm('skiped') }>Skip</Button>
+            <Button className={(!choosenAnswer && 'disabled')} onClick={() => submitQuestionForm(CONFIRM_ANSWER)} >Confirm</Button>
+            <Button className="secondary" onClick={ () => submitQuestionForm(SKIPPED_ANSWER) }>Skip</Button>
           </div>
         </form>
       </QuestionFormStyled>

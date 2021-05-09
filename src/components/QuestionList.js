@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 import styled from 'styled-components'
+import { SUCCESS_ANSWER } from '../constants'
 
 const QuestionListStyled = styled.div`
   overflow-y: auto;
@@ -11,6 +12,11 @@ const QuestionListStyled = styled.div`
   justify-content: start;
   flex-direction: column;
   width: 100%;
+
+  &.big {
+    height: 100%;
+    max-height: none;
+  }
 
   .questionListItem {
     width: 90%;
@@ -40,14 +46,14 @@ const QuestionListStyled = styled.div`
 
 `
 
-function QuestionList ({ questions }) {
+function QuestionList ({ big = false, questions }) {
   return (
-      <QuestionListStyled>
+      <QuestionListStyled className={(big && 'big')}>
           {questions.slice(0).reverse().map((q, index) => {
             return (
               <div className='questionListItem' key={'hol' + index} >
                 <p>What is {q.text}?</p>
-                {q.result === 'success'
+                {q.result === SUCCESS_ANSWER
                   ? <p className='resultQuestion'><FontAwesomeIcon size='2x' icon={faCheckCircle} color='#70B25C' /> <span className='success'>{q.number}</span></p>
                   : <p className='resultQuestion'><FontAwesomeIcon size='2x' icon={faTimesCircle} color='#B74B4D' /> <span className='error'>{q.result}</span> - Right answer was {q.number}</p>
                 }

@@ -19,6 +19,13 @@ const MainContainerStyled = styled.div`
         font-size: 3em;
         text-transform: uppercase;
         margin: 0;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        color: white;
+        font-size: 1.5em;
+        margin: 0;
     }
 
     p {

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import ProgressBar from '../components/ProgressBar'
 import QuestionForm from '../components/QuestionForm'
 import QuestionList from '../components/QuestionList'
+import { API, MAX_NUMBER_QUESTIONS, MAX_TIME_QUESTION, SKIPPED_ANSWER } from '../constants'
 
 const GameStyled = styled(MainContainerStyled)`
 `
@@ -26,7 +27,7 @@ function Game () {
 
   const GetNewQuestion = () => {
     dispatch({ type: REQUEST_IN_PROGRESS })
-    fetch('http://numbersapi.com/random/trivia?fragment&json')
+    fetch(API)
       .then((response) => {
         return response.json()
       })
@@ -44,7 +45,6 @@ function Game () {
       })
       .catch((e) => {
         const errorText = 'Hubo un error al cargar la pregunta'
-        console.log(errorText)
         dispatch({
           type: GET_QUESTION,
           payload: null,
@@ -74,7 +74,7 @@ function Game () {
   }, [])
 
   useEffect(() => {
-    if (questions.length === 10) {
+    if (questions.length === MAX_NUMBER_QUESTIONS) {
       history.push('/results')
     }
   }, [questions])
@@ -88,7 +88,7 @@ function Game () {
   }, [error])
 
   useEffect(() => {
-    const timer = counter < 30 ? setTimeout(() => setCounter(counter + 1), 1000) : NextQuestion('skiped')
+    const timer = counter < MAX_TIME_QUESTION ? setTimeout(() => setCounter(counter + 1), 1000) : NextQuestion(SKIPPED_ANSWER)
     return () => clearTimeout(timer)
   }, [counter])
 
@@ -97,8 +97,8 @@ function Game () {
             <h2>Trividabo</h2>
             {currentQuestion &&
               <>
-                <p>Question {questions.length + 1}</p>
-                <ProgressBar time={counter} maxTime='30' ></ProgressBar>
+                <h3>Question {questions.length + 1} of {MAX_NUMBER_QUESTIONS}</h3>
+                <ProgressBar time={counter} maxTime={MAX_TIME_QUESTION} ></ProgressBar>
                 <QuestionForm question={currentQuestion} nextQuestion={NextQuestion} ></QuestionForm>
               </>
             }

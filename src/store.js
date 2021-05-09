@@ -7,7 +7,7 @@ const initialState = {
   questions: [],
   currentQuestion: null,
   counter: 0,
-  result: null
+  numCorrectAnswers: 0
 }
 
 const store = createStore(

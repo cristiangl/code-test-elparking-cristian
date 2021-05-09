@@ -1,12 +1,20 @@
-import { REQUEST_IN_PROGRESS, GET_QUESTION, SAVE_QUESTION } from '../actions/rootActions'
+import { REQUEST_IN_PROGRESS, GET_QUESTION, SAVE_QUESTION, NEW_GAME } from '../actions/rootActions'
+import { SUCCESS_ANSWER } from '../constants'
 
 export default function rootReducer (state, action) {
-  console.log(action)
   switch (action.type) {
     case REQUEST_IN_PROGRESS: {
       return {
         ...state,
         loading: true
+      }
+    }
+    case NEW_GAME: {
+      return {
+        ...state,
+        questions: [],
+        currentQuestion: null,
+        numCorrectAnswers: 0
       }
     }
     case GET_QUESTION: {
@@ -37,7 +45,8 @@ export default function rootReducer (state, action) {
     case SAVE_QUESTION: {
       return {
         ...state,
-        questions: [...state.questions, action.payload]
+        questions: [...state.questions, action.payload],
+        numCorrectAnswers: action.payload.result === SUCCESS_ANSWER ? ++state.numCorrectAnswers : state.numCorrectAnswers
       }
     }
     default: return state
