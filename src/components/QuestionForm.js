@@ -45,7 +45,7 @@ function QuestionForm ({ question, nextQuestion }) {
 
   const submitQuestionForm = (typeAction) => {
     if (typeAction === CONFIRM_ANSWER) {
-      if (question.number === parseInt(choosenAnswer)) {
+      if (question.number.toString() === choosenAnswer.toString()) {
         nextQuestion(SUCCESS_ANSWER)
       } else {
         nextQuestion(ERROR_ANSWER)

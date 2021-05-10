@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { CHANGE_COLOR_TIME } from '../constants'
 
 const ProgressBarStyled = styled.div`
 
@@ -14,7 +15,7 @@ const ProgressBarStyled = styled.div`
     .filler {
         height: 100%;
         width: ${props => props.percentage}%;
-        background: ${props => props.time >= 23 ? '#B74B4D' : '#70B25C'};
+        background: ${props => props.time >= CHANGE_COLOR_TIME ? '#B74B4D' : '#70B25C'};
         border-radius: inherit;
         text-align: right;
     }

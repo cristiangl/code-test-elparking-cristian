@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import MainContainerStyled from '../styled/mainContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { REQUEST_IN_PROGRESS, GET_QUESTION, SAVE_QUESTION } from '../actions/rootActions'
+import { getQuestionAction, saveQuestionAction } from '../actions/rootActions'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ProgressBar from '../components/ProgressBar'
 import QuestionForm from '../components/QuestionForm'
 import QuestionList from '../components/QuestionList'
-import { API, MAX_NUMBER_QUESTIONS, MAX_TIME_QUESTION, SKIPPED_ANSWER } from '../constants'
+import { MAX_NUMBER_QUESTIONS, MAX_TIME_QUESTION, SKIPPED_ANSWER } from '../constants'
 
 const GameStyled = styled(MainContainerStyled)`
 `
@@ -25,53 +25,17 @@ function Game () {
   const loading = useSelector((state) => state.loading)
   const error = useSelector((state) => state.error)
 
-  const GetNewQuestion = () => {
-    dispatch({ type: REQUEST_IN_PROGRESS })
-    fetch(API)
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        if (data.number.toString().includes('e')) {
-          GetNewQuestion()
-        } else {
-          dispatch({
-            type: GET_QUESTION,
-            payload: data,
-            error: null
-          })
-          setCounter(0)
-        }
-      })
-      .catch((e) => {
-        const errorText = 'Hubo un error al cargar la pregunta'
-        dispatch({
-          type: GET_QUESTION,
-          payload: null,
-          error: {
-            text: errorText,
-            type: e.message
-          }
-        })
-      })
-  }
-
   const NextQuestion = (resultQuestion) => {
     const tempQuestion = currentQuestion
     tempQuestion.result = resultQuestion
-
-    dispatch({
-      type: SAVE_QUESTION,
-      payload: tempQuestion,
-      error: null
-    })
-
-    GetNewQuestion()
+    dispatch(saveQuestionAction(tempQuestion))
+    dispatch(getQuestionAction())
+    setCounter(0)
   }
 
   useEffect(() => {
-    GetNewQuestion()
-  }, [])
+    dispatch(getQuestionAction())
+  }, [dispatch])
 
   useEffect(() => {
     if (questions.length === MAX_NUMBER_QUESTIONS) {
@@ -88,9 +52,11 @@ function Game () {
   }, [error])
 
   useEffect(() => {
-    const timer = counter < MAX_TIME_QUESTION ? setTimeout(() => setCounter(counter + 1), 1000) : NextQuestion(SKIPPED_ANSWER)
-    return () => clearTimeout(timer)
-  }, [counter])
+    if (currentQuestion) {
+      const timer = counter < MAX_TIME_QUESTION ? setTimeout(() => setCounter(counter + 1), 1000) : NextQuestion(SKIPPED_ANSWER)
+      return () => clearTimeout(timer)
+    }
+  }, [counter, currentQuestion])
 
   return (
         <GameStyled className={(loading && 'load')}>
