@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CHANGE_COLOR_TIME } from '../constants'
+import { CHANGE_COLOR_TIME, MAX_TIME_QUESTION } from '../constants'
 
 const ProgressBarStyled = styled.div`
 
@@ -21,8 +21,8 @@ const ProgressBarStyled = styled.div`
     }
 `
 
-function ProgressBar ({ time, maxTime }) {
-  const percentage = parseInt((time * 100) / maxTime)
+function ProgressBar ({ time }) {
+  const percentage = parseInt((time * 100) / MAX_TIME_QUESTION)
   return (
        <ProgressBarStyled percentage={percentage} time={time} >
            <div className="filler">

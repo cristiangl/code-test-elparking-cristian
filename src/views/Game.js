@@ -4,14 +4,23 @@ import MainContainerStyled from '../styled/mainContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { getQuestionAction, saveQuestionAction } from '../actions/rootActions'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import ProgressBar from '../components/ProgressBar'
 import QuestionForm from '../components/QuestionForm'
 import QuestionList from '../components/QuestionList'
 import { MAX_NUMBER_QUESTIONS, MAX_TIME_QUESTION, SKIPPED_ANSWER } from '../constants'
+import serverDown from '../assets/img/serverDown.svg'
+import CustomButtonStyled from '../styled/customButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRedo } from '@fortawesome/free-solid-svg-icons'
 
 const GameStyled = styled(MainContainerStyled)`
+    img{
+    width: 400px;
+    height: auto;
+  }
+`
+const Button = styled(CustomButtonStyled)`
+  margin-top: 20px;
 `
 
 function Game () {
@@ -25,6 +34,11 @@ function Game () {
   const loading = useSelector((state) => state.loading)
   const error = useSelector((state) => state.error)
 
+  const GetNewQuestion = () => {
+    dispatch(getQuestionAction())
+    setCounter(0)
+  }
+
   const NextQuestion = (resultQuestion) => {
     const tempQuestion = currentQuestion
     tempQuestion.result = resultQuestion
@@ -34,22 +48,14 @@ function Game () {
   }
 
   useEffect(() => {
-    dispatch(getQuestionAction())
-  }, [dispatch])
+    GetNewQuestion()
+  }, [])
 
   useEffect(() => {
     if (questions.length === MAX_NUMBER_QUESTIONS) {
       history.push('/results')
     }
   }, [questions])
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error.text, {
-        position: toast.POSITION.TOP_CENTER
-      })
-    }
-  }, [error])
 
   useEffect(() => {
     if (currentQuestion) {
@@ -61,17 +67,23 @@ function Game () {
   return (
         <GameStyled className={(loading && 'load')}>
             <h2>Trividabo</h2>
-            {currentQuestion &&
+            {error &&
+              <>
+              <p>We are having problems</p>
+              <img src={serverDown} alt="" />
+              <Button onClick={() => GetNewQuestion()}>Try again <FontAwesomeIcon icon={faRedo}></FontAwesomeIcon></Button>
+              </>
+            }
+            {!error && currentQuestion &&
               <>
                 <h3>Question {questions.length + 1} of {MAX_NUMBER_QUESTIONS}</h3>
-                <ProgressBar time={counter} maxTime={MAX_TIME_QUESTION} ></ProgressBar>
+                <ProgressBar time={counter} ></ProgressBar>
                 <QuestionForm question={currentQuestion} nextQuestion={NextQuestion} ></QuestionForm>
               </>
             }
-            {questions &&
+            {!error && questions &&
               <QuestionList questions={questions}></QuestionList>
             }
-            <ToastContainer></ToastContainer>
         </GameStyled>
   )
 }

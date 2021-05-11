@@ -29,11 +29,11 @@ function Home () {
   }
 
   return (
-        <HomeStyled>
-            <h2>Trividabo</h2>
-            <p>Welcome to trividabo number quiz!</p>
-            <Button onClick={startGame}>Start <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></Button>
-        </HomeStyled>
+    <HomeStyled>
+        <h2>Trividabo</h2>
+        <p>Welcome to trividabo number quiz!</p>
+        <Button onClick={startGame}>Start <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></Button>
+    </HomeStyled>
   )
 }
 

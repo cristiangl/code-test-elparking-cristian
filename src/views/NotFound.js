@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import MainContainerStyled from '../styled/mainContainer'
-import NotFoundImg from '../assets/img/notFound.svg'
+import NotFoundImg from '../assets/img/404.svg'
 
 const NotFoundStyled = styled(MainContainerStyled)`
 
   img{
-    width: 100%;
+    width: 400px;
     height: auto;
   }
 `

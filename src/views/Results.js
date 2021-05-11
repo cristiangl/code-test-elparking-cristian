@@ -14,7 +14,7 @@ import { MAX_NUMBER_QUESTIONS } from '../constants'
 const ResultsStyled = styled(MainContainerStyled)`
 
 img{
-    width: 300px;
+    width: 500px;
     height: auto;
   }
 
