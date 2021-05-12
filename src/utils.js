@@ -16,7 +16,6 @@ export const randomAnswers = (number) => {
     }
   }
   let randomPossiblesNumbers = rangeNumbers(number - rangeLimit, number + rangeLimit, steps)
-  console.log(randomPossiblesNumbers)
   randomPossiblesNumbers = randomPossiblesNumbers.filter((value, index, arr) => {
     return value !== number
   })

@@ -18,18 +18,10 @@ function App () {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path='/results'>
-              <Results></Results>
-            </Route>
-            <Route exact path='/game'>
-              <Game></Game>
-            </Route>
-            <Route exact path='/'>
-              <Home></Home>
-            </Route>
-            <Route>
-              <NotFound></NotFound>
-            </Route>
+            <Route exact path='/results' component={Results} />
+            <Route exact path='/game' component={Game} />
+            <Route exact path='/' component={Home} />
+            <Route exact component={NotFound} />
           </Switch>
 
         </Router>

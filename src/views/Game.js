@@ -52,7 +52,7 @@ function Game () {
   }, [])
 
   useEffect(() => {
-    if (questions.length === MAX_NUMBER_QUESTIONS) {
+    if (questions && questions.length === MAX_NUMBER_QUESTIONS) {
       history.push('/results')
     }
   }, [questions])
@@ -71,13 +71,13 @@ function Game () {
               <>
               <p>We are having problems</p>
               <img src={serverDown} alt="" />
-              <Button onClick={() => GetNewQuestion()}>Try again <FontAwesomeIcon icon={faRedo}></FontAwesomeIcon></Button>
+              <Button id="tryAgainButton" onClick={() => GetNewQuestion()}>Try again <FontAwesomeIcon icon={faRedo}></FontAwesomeIcon></Button>
               </>
             }
             {!error && currentQuestion &&
               <>
                 <h3>Question {questions.length + 1} of {MAX_NUMBER_QUESTIONS}</h3>
-                <ProgressBar time={counter} ></ProgressBar>
+                <ProgressBar time={counter} maxTime={MAX_TIME_QUESTION} ></ProgressBar>
                 <QuestionForm question={currentQuestion} nextQuestion={NextQuestion} ></QuestionForm>
               </>
             }
