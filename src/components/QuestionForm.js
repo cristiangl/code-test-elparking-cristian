@@ -36,18 +36,25 @@ const QuestionFormStyled = styled.div`
         p {
           font-size: 1.5em;
         }
-        .buttonsBox {
-          flex-direction: column;
-        }
+    }
+    
+    @media (max-width: 425px) {
+      .buttonsBox {
+        flex-direction: column;
+      }
+
+      form {
+        flex-direction: column;
+      }
     }
 
 `
 
 const Button = styled(CustomButtonStyled)`
+  flex: 1;
   margin: 5px;
-  @media (max-width: 768px) {
+  @media (max-width: 425px) {
     width: 100%;
-
   }
 `
 

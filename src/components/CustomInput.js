@@ -33,7 +33,10 @@ const CustomInputStyled = styled.div`
     input:checked ~ label {
         background: var(--secondary-color);
     }
-    
+
+    @media (max-width: 425px) {
+        width: 90%;
+    }
 `
 
 function CustomInput ({ answer, onClick }) {

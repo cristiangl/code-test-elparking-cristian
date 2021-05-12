@@ -9,6 +9,13 @@ const NotFoundStyled = styled(MainContainerStyled)`
     width: 400px;
     height: auto;
   }
+
+  @media (max-width: 425px) {
+    img{
+        width: 100%;
+        height: auto;
+    }
+  }
 `
 
 function NotFound () {

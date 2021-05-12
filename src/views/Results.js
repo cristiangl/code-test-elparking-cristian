@@ -16,11 +16,18 @@ const ResultsStyled = styled(MainContainerStyled)`
 img{
     width: 500px;
     height: auto;
+ }
+
+@media (max-width: 425px) {
+  img{
+      width: 100%;
+      height: auto;
   }
+}
 
 `
 const Button = styled(CustomButtonStyled)`
-  margin-top: 20px;
+  margin: 20px 0px;
 `
 
 function Results () {

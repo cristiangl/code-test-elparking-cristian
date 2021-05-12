@@ -44,6 +44,10 @@ const QuestionListStyled = styled.div`
     margin: 0px 5px;
   }
 
+  @media (max-width: 768px) {
+    max-height: none;
+    height: 100%;
+  }
 `
 
 function QuestionList ({ big = false, questions }) {

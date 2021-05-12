@@ -20,7 +20,14 @@ const GameStyled = styled(MainContainerStyled)`
   }
 
   @media (max-width: 768px) {
-    height: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 425px) {
+    img{
+        width: 100%;
+        height: auto;
+  }
   }
 `
 const Button = styled(CustomButtonStyled)`
