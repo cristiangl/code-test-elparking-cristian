@@ -61,5 +61,18 @@ const MainContainerStyled = styled.div`
     background-size: 100%;
     }
 
+    @media (max-width: 768px) {
+        width: 100%;
+        height: 100vh;
+        padding: 0px 20px;
+        border-radius: 0;
+        background: var(--dark-color);
+        box-shadow:  none;
+
+        h2 {
+            margin-top: 10px;
+        }
+    }
+
 `
 export default MainContainerStyled

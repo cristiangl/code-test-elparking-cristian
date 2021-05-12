@@ -18,6 +18,10 @@ const GameStyled = styled(MainContainerStyled)`
     width: 400px;
     height: auto;
   }
+
+  @media (max-width: 768px) {
+    height: 100%;
+  }
 `
 const Button = styled(CustomButtonStyled)`
   margin-top: 20px;

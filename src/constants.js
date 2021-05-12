@@ -9,5 +9,5 @@ export const ERROR_ANSWER = 'error'
 
 // Game const
 export const MAX_NUMBER_QUESTIONS = 10
-export const MAX_TIME_QUESTION = 30
+export const MAX_TIME_QUESTION = 300
 export const CHANGE_COLOR_TIME = 20

@@ -29,11 +29,26 @@ const QuestionFormStyled = styled.div`
         flex-direction: row;
     }
 
+    @media (max-width: 768px) {
+
+        width: 90%;
+
+        p {
+          font-size: 1.5em;
+        }
+        .buttonsBox {
+          flex-direction: column;
+        }
+    }
+
 `
 
 const Button = styled(CustomButtonStyled)`
-  flex: 1;
   margin: 5px;
+  @media (max-width: 768px) {
+    width: 100%;
+
+  }
 `
 
 function QuestionForm ({ question, nextQuestion }) {
