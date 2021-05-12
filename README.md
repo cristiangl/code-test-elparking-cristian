@@ -4,7 +4,7 @@ Aplicación web que consiste en un Trivial de números utilizando para las pregu
 
 ## Demo
 
-Si quieres probar la demo del proyecto desplegado, puedes visitar [TrividaboApp](https://trividabo-codetest.vercel.app)
+Si quieres probar la demo del proyecto desplegado, puedes visitar [TrividaboApp](https://trividabo-codetest-cristian.vercel.app)
 
 Antes de probar tenga en cuanta las [Notas](#notas)
 
