@@ -41,6 +41,7 @@ function Game () {
   const [counter, setCounter] = useState(0)
 
   const currentQuestion = useSelector((state) => state.currentQuestion)
+  const isCurrentQuestionLoad = useSelector((state) => state.isCurrentQuestionLoad)
   const questions = useSelector((state) => state.questions)
   const loading = useSelector((state) => state.loading)
   const error = useSelector((state) => state.error)
@@ -59,7 +60,9 @@ function Game () {
   }
 
   useEffect(() => {
-    GetNewQuestion()
+    if (!isCurrentQuestionLoad) {
+      GetNewQuestion()
+    }
   }, [])
 
   useEffect(() => {

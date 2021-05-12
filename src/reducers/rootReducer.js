@@ -8,7 +8,8 @@ export default function rootReducer (state, action) {
         ...state,
         questions: [],
         currentQuestion: null,
-        numCorrectAnswers: 0
+        numCorrectAnswers: 0,
+        isCurrentQuestionLoad: false
       }
     }
     case GET_REQUEST_QUESTION: {
@@ -22,7 +23,8 @@ export default function rootReducer (state, action) {
         ...state,
         currentQuestion: action.payload,
         loading: false,
-        error: action.error
+        error: action.error,
+        isCurrentQuestionLoad: true
       }
     }
 
@@ -30,7 +32,8 @@ export default function rootReducer (state, action) {
       return {
         ...state,
         questions: [...state.questions, action.payload],
-        numCorrectAnswers: action.payload.result === SUCCESS_ANSWER ? ++state.numCorrectAnswers : state.numCorrectAnswers
+        numCorrectAnswers: action.payload.result === SUCCESS_ANSWER ? ++state.numCorrectAnswers : state.numCorrectAnswers,
+        isCurrentQuestionLoad: false
       }
     }
     default: return state

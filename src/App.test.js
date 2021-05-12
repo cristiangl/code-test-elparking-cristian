@@ -13,8 +13,6 @@ import { createMemoryHistory } from 'history'
 import QuestionList from './components/QuestionList'
 import QuestionForm from './components/QuestionForm'
 
-require('jest-fetch-mock').enableFetchMocks()
-
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 describe('Trividabo App Test', () => {
@@ -29,7 +27,7 @@ const initialAppState = {
   error: null,
   questions: [],
   currentQuestion: null,
-  counter: 0,
+  isCurrentQuestionLoad: false,
   numCorrectAnswers: 0
 }
 
